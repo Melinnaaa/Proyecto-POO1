@@ -38,32 +38,6 @@ public class Menu
 	}
 	
 	
-	// Crea un paciente y lo guarda en una tabla hash.
-	public void createPatient(Hashtable <String, Paciente> patientName, Hashtable <String, Paciente> patientRut) throws IOException 
-	{
-		// Se obtienen los datos del paciente
-        System.out.println("Ingrese el nombre del paciente:");
-        String name = getline();
-        
-        System.out.println("Ingrese el rut del paciente:");
-        String rut = getline();
-        
-        System.out.println("Ingrese la edad del paciente:");
-        int age = toInt();
-        
-        System.out.println("Ingrese la gravedad del paciente:");
-        int gravity = toInt();
-        
-        // Variable temporal.
-        Paciente tmp = new Paciente(name, rut, age, gravity);
-        
-        // Guardamos el paciente en la tabla a partir del nombre.-
-        patientName.put(name, tmp);
-        
-        // Se guarda el paciente en la tabla a partir del rut.
-        patientRut.put(rut, tmp);
-    }
-	
 	// Busca a partir del nombre.
 	public void search(Hashtable <String, Paciente> patient, Paciente tmp) throws IOException
 	{	
@@ -161,7 +135,7 @@ public class Menu
 		}
 	}
 	
-	public void showPatients(Hashtable <String, Paciente> patientName) throws IOException
+	public void showPatients(ArrayList <Paciente> patients) throws IOException
 	{
 		
 	}
