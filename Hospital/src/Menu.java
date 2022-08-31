@@ -10,7 +10,6 @@ public class Menu
 	Menu()
 	{
 		reader = new BufferedReader(new InputStreamReader(System.in));
-		
 	}
 	
 	// Lee por consola
@@ -112,6 +111,8 @@ public class Menu
         System.out.println("2. Por rut.");
         System.out.println("0. Volver.");
         System.out.println("---");
+        
+        // in es input.
         int in = toInt();
         Menu m = new Menu();
     
