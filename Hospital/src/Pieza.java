@@ -2,6 +2,7 @@ import java.util.*;
 public class Pieza 
 {
 	private int totalPatients;
+	private int totalBeds;
 	private ArrayList <Paciente> patients; 
 	private Hashtable <String, Paciente> patientsName;
 	private Hashtable <String, Paciente> patientsRut;
@@ -9,6 +10,7 @@ public class Pieza
 	public Pieza (ArrayList <Paciente>patients, Hashtable <String, Paciente>patientsName, Hashtable <String, Paciente>patientsRut)
 	{
 		totalPatients = 0;
+		totalBeds = 5;
 		patients = this.patients;
 		patientsName = this.patientsName;
 		patientsRut = this.patientsRut;
@@ -32,6 +34,11 @@ public class Pieza
 	public void setTotalPatients(int totalPatients) 
 	{
 		this.totalPatients = totalPatients;
+	}
+	
+	public void setTotalBeds(int totalBeds)
+	{
+		this.totalBeds = totalBeds;
 	}
 
 	public Hashtable<String, Paciente> getPatientsRut() 
