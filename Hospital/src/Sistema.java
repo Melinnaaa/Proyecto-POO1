@@ -11,8 +11,16 @@ public class Sistema {
 		// Tabla hash que guarda un paciente a partir del rut
 		Hashtable<String, Paciente> patientRut = new Hashtable<String, Paciente>(10);
 		
+		// ArrayList que guarda a todos los pacientes (Utilizado para mostrarlos a todos)
+		ArrayList <Paciente> patients = new ArrayList<Paciente>(10);
+		
+		// ArrayList que contiene las piezas
+		ArrayList <Pieza> rooms = new ArrayList<Pieza>(10);
+		
+		// Opción ingresada por el usuario
 		int opcion;
 		
+		// Clase menu para utilizar sus metodos.
 		Menu menu = new Menu();
 		
 		while (true)
@@ -30,7 +38,7 @@ public class Sistema {
 				
 				case 2:
 				{
-					
+					menu.deletePatient(patientName, patientRut);
 					break;
 				}
 				
@@ -41,9 +49,10 @@ public class Sistema {
 				
 				case 4:
 				{
-					menu.searchPatient(patientName, patientRut);
+					menu.search(patientName, patientRut);
 					break;
 				}
+				
 				case 0:
 				{
 					return;

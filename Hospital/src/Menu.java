@@ -37,9 +37,12 @@ public class Menu
         System.out.println("0. Salir.");
         System.out.println("---");
 	}
-		
+	
+	
+	// Crea un paciente y lo guarda en una tabla hash.
 	public void createPatient(Hashtable <String, Paciente> patientName, Hashtable <String, Paciente> patientRut) throws IOException 
 	{
+		// Se obtienen los datos del paciente
         System.out.println("Ingrese el nombre del paciente:");
         String name = getline();
         
@@ -52,6 +55,7 @@ public class Menu
         System.out.println("Ingrese la gravedad del paciente:");
         int gravity = toInt();
         
+        // Variable temporal.
         Paciente tmp = new Paciente(name, rut, age, gravity);
         
         // Guardamos el paciente en la tabla a partir del nombre.-
@@ -61,12 +65,9 @@ public class Menu
         patientRut.put(rut, tmp);
     }
 	
-	public void searchByName(Hashtable <String, Paciente> patient) throws IOException
-	{
-		System.out.println("Ingrese el nombre del paciente a buscar:");
-		String name = getline();
-		Paciente tmp =  patient.get(name);
-		
+	// Busca a partir del nombre.
+	public void search(Hashtable <String, Paciente> patient, Paciente tmp) throws IOException
+	{	
 		// Se comprueba que el paciente exista
 		if (tmp == null) 
 		{
@@ -82,7 +83,7 @@ public class Menu
 		}
 	}
 	
-	public void searchByRut(Hashtable <String, Paciente> patient) throws IOException
+	public void search(Hashtable <String, Paciente> patient) throws IOException
 	{
 		System.out.println("Ingrese el rut del paciente a buscar:");
 		String rut = getline();
@@ -103,7 +104,8 @@ public class Menu
 		}
 	}
 	
-	public void searchPatient(Hashtable <String, Paciente> patientName, Hashtable <String, Paciente> patientRut) throws IOException
+	// Se encarga de ver el tipo de busqueda que se quiere realizar.
+	public void search(Hashtable <String, Paciente> patientName, Hashtable <String, Paciente> patientRut) throws IOException
 	{
 		System.out.println("---");
 		System.out.println("1. Por nombre.");
@@ -117,12 +119,15 @@ public class Menu
         {
         	case 1:
         	{
-        		m.searchByName(patientName);
+        		System.out.println("Ingrese el nombre del paciente a buscar:");
+        		String name = getline();
+        		Paciente tmp =  patientName.get(name);
+        		m.search(patientName, tmp);
         		break;
         	}
         	case 2:
         	{
-        		m.searchByRut(patientRut);
+        		m.search(patientRut);
         		break;
         	}
         	case 0:
@@ -131,10 +136,32 @@ public class Menu
         	}
         	default:
         	{
-        		System.out.println("Ingrese una opción valida");
+        		System.out.println("Ingrese una opción válida");
         		break;
         	}
         	
         }
+	}
+	
+	public void deletePatient(Hashtable <String, Paciente> patientName, Hashtable <String, Paciente> patientRut) throws IOException
+	{
+		System.out.println("Ingrese el nombre del paciente a eliminar:");
+		String in = getline();
+		Paciente tmp = patientName.get(in);
+		if (tmp == null)
+		{
+			System.out.println("El paciente que quiere eliminar no existe");
+			return;
+		}
+		else
+		{
+			patientName.remove(in);
+			patientRut.remove(tmp.getRut());
+		}
+	}
+	
+	public void showPatients(Hashtable <String, Paciente> patientName) throws IOException
+	{
+		
 	}
 }
