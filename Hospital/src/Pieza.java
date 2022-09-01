@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 public class Pieza 
 {
@@ -9,56 +10,67 @@ public class Pieza
 	{
 		totalPatients = 0;
 		totalBeds = 5;
-		patientsRut = new HashMap<String, Paciente>(10);
+		patientsRut = new HashMap<String, Paciente>();
 	}
 
+	// Se obtiene la cantidad de pacientes de la pieza.
 	public int getTotalPatients() 
 	{
-		return totalPatients;
-	}
-
-	public void setTotalPatients(int totalPatients) 
-	{
-		this.totalPatients = totalPatients;
+		return patientsRut.size();
 	}
 	
+	// Retorna el mapa de pacientes
 	public HashMap<String, Paciente> getPatientsRut() 
 	{
 		return patientsRut;
 	}
 	
-	public void getPatientsRut(HashMap<String, Paciente> patientsRut) 
+	// Inserta un paciente en el mapa de pacientes.
+	public void setPatients(Paciente tmp, String rut)
 	{
-		patientsRut.;
+		patientsRut.put(rut, tmp);
 	}
 	
-	// Crea un paciente y lo guarda en una tabla hash.
-	public void createPatient(HashMap <String, Pieza> rooms) throws IOException 
+	// Se encarga de buscar el paciente, retorna true de existir, false de no existir.
+	public boolean search (String rut) throws IOException
 	{
-		// Se obtienen los datos del paciente
-        System.out.println("Ingrese el nombre del paciente:");
-        String name = getline();
-        
-        System.out.println("Ingrese el rut del paciente:");
-        String rut = getline();
-        
-        System.out.println("Ingrese la edad del paciente:");
-        int age = toInt();
-        
-        System.out.println("Ingrese la gravedad del paciente:");
-        int gravity = toInt();
-        
-        // Variable temporal.
-        Paciente tmp = new Paciente(name, rut, age, gravity);
-        
-        // Se pide la pieza a la cual se ingresará al paciente.
-        System.out.println("Ingrese el numero de la pieza:");
-        String room = getline();
-        // Guardamos el paciente en la tabla a partir del nombre.-
-        Pieza tmpRoom = 
-        		tmpRoom.put(name, tmp);
-        
-        // Se guarda el paciente en la tabla a partir del rut.
-        patientRut.put(rut, tmp);
-    }
+		Paciente tmp =  patientsRut.get(rut);
+		// Se comprueba que el paciente exista
+		if (tmp == null) 
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	// Se encarga de buscar el paciente y imprimir los datos de este si fue encontrado.
+	public boolean search (String rut, int i) throws IOException
+	{
+		Paciente tmp =  patientsRut.get(rut);
+		
+		// Se comprueba que el paciente exista
+		if (tmp == null) 
+		{
+			return false;
+		}
+		System.out.println("El paciente se encuentra en la pieza " + (i+1) + "\n");
+		tmp.showPatients();
+		return true;
+	}
+	
+	// Recorre los pacientes en la pieza.
+	public void showPatients() throws IOException
+	{
+		// For each para recorrer los values del mapa.
+		for (Paciente m : patientsRut.values())
+		{
+			// muestra los datos del paciente.
+			m.showPatients();
+		}
+	}
+	
+	public void deletePatient(String rut) throws IOException
+	{
+		patientsRut.remove(rut);
+	}
 }
