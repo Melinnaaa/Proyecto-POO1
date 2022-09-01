@@ -5,9 +5,11 @@ public class Sistema {
 
 	public static void main(String[] args) throws IOException
 	{
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		
 		// ArrayList que contiene las piezas
-		HashMap <String, Pieza> rooms = new HashMap <String, Pieza>(10);
+		ArrayList<Pieza> rooms = new ArrayList<Pieza>(10);
+		initializeArray(rooms);
 		
 		// Opción ingresada por el usuario
 		int opcion;
@@ -18,31 +20,68 @@ public class Sistema {
 		while (true)
 		{
 			menu.showMenu();
-			opcion = menu.toInt();
+			opcion = Integer.parseInt(reader.readLine());
 			
 			switch (opcion)
 			{
 				case 1:
 				{
-					menu.createPatient(patientName, patientRut);
+					Paciente patient = new Paciente();
+					patient.getPatientData();
+					
+					System.out.println("Ingrese la pieza en donde se quedará el paciente (1-10)");
+					int roomNumber = menu.verifyNumber(1, 10);
+					
+					// Se disminuye para trabajar correctamente con los indices
+					roomNumber = roomNumber - 1;
+					
+					Pieza tmpRoom;
+					tmpRoom = rooms.get(roomNumber);
+					      
+			        // Se revisa que la pieza no este llena.
+					if (tmpRoom.getTotalPatients() == 5)
+					{	
+						System.out.println("La pieza esta llena, por favor seleccione otra.");
+						break;
+					}
+					else
+					{
+						tmpRoom.setPatients(patient, patient.getRut());
+					}
 					break;
 				}
 				
 				case 2:
 				{
-					menu.deletePatient(patientName, patientRut);
+					System.out.println("Ingrese el rut del paciente a eliminar:");
+					String rut = reader.readLine();
+					Pieza tmpRoom;
+					for (int i = 0 ; i < 10 ; i++)
+					{
+						tmpRoom = rooms.get(i);
+						if (tmpRoom.search(rut) == true)
+						{
+							tmpRoom.deletePatient(rut);
+						}
+					}
 					break;
 				}
 				
 				case 3:
 				{
-					menu.showPatients();
+					Pieza tmpRoom;
+					// Se recorren todas las piezas.
+					for (int i = 0 ; i < 10 ; i ++)
+					{
+						tmpRoom = rooms.get(i);
+						tmpRoom.showPatients();
+					}
 					break;
 				}
 				
 				case 4:
 				{
-					menu.search(patientName, patientRut);
+					seekPatient(rooms);
 					break;
 				}
 				
@@ -59,4 +98,40 @@ public class Sistema {
 			}
 		}
 	}
+	
+	// Se instancia cada pieza del arrayList
+	public static void initializeArray(ArrayList<Pieza> rooms)
+	{
+		// Se inicializan las piezas.
+		for (int i = 0 ; i < 10 ; i++)
+		{
+			Pieza tmpRoom = new Pieza();
+			rooms.add(i, tmpRoom);
+		}
+	}
+	
+	public static void seekPatient(ArrayList<Pieza> rooms) throws IOException
+	{
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		
+		System.out.println("Ingrese el rut del paciente");
+		String rut = reader.readLine();
+		Pieza tmp;
+		
+		// Se recorren las piezas
+		for(int i = 0 ; i < 10 ; i = i + 1)
+		{
+			// Se obtiene la pieza en la posición i-ésima.
+			tmp = rooms.get(i);
+			
+			// Se busca el paciente en la pieza y si existe se termina el ciclo.
+			if (tmp.search(rut, i) == true) 
+			{
+				return;
+			}		
+		}
+		
+		System.out.println("El paciente no fue encontrado");
+	}
+	
 }
