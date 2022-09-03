@@ -22,6 +22,15 @@ public class Pieza
 		return patientsRut.size();
 	}
 	
+	public int getTotalBeds()
+	{
+		return totalBeds;
+	}
+	
+	public int getRoomNumber()
+	{
+		return roomNumber;
+	}
 	
 	// Inserta un paciente en el mapa de pacientes.
 	public void addPatient(Paciente tmp, String rut)
@@ -73,6 +82,7 @@ public class Pieza
 		for (Paciente m : patientsRut.values())
 		{
 			// muestra los datos del paciente.
+			System.out.println("Pieza " + roomNumber);
 			m.showPatientData();
 		}
 	}
