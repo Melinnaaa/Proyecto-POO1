@@ -103,13 +103,19 @@ public class Sistema
 	}
 	
 	// Se instancia cada pieza del arrayList
-	public static void initializeArray(ArrayList<Pieza> rooms)
+	public static void initializeArray(ArrayList<Pieza> rooms) throws IOException
 	{
+		CSV file = new CSV("patients");
+		String line = file.firstLine();
 		// Se inicializan las piezas.
 		for (int i = 0 ; i < 10 ; i++)
 		{
+			Paciente tmpPacient = new Paciente();
 			Pieza tmpRoom = new Pieza(i+1);
 			rooms.add(i, tmpRoom);
+			tmpPacient.readPatientData(line, file);
+			tmpRoom.addPatient(tmpPacient, tmpPacient.getRut());
+			line = file.nextLine();
 		}
 	}
 	
@@ -117,7 +123,7 @@ public class Sistema
 	public static void seekPatient(ArrayList<Pieza> rooms) throws IOException
 	{
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		
+		 
 		System.out.println("Ingrese el rut del paciente");
 		String rut = reader.readLine();
 		Pieza tmp;
