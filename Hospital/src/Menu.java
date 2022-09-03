@@ -29,6 +29,7 @@ public class Menu
 		{
 			n = Integer.parseInt(reader.readLine());
 		}while(n < low || n > high);
+		
 		return n;
 	}
 }
