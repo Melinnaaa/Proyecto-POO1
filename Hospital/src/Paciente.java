@@ -34,6 +34,11 @@ public class Paciente implements VerifyRut
 	{
 		this.name = name;
 	}
+	
+	public String getName()
+	{
+		return name;
+	}
 
 	public int getAge() 
 	{
@@ -92,13 +97,24 @@ public class Paciente implements VerifyRut
         gravedad = Integer.parseInt(reader.readLine());
 	}
 	
+	// Se obtienen los datos del paciente a traves de un archivo csv
+	public void readPatientData(String line, CSV file)
+	{
+		name = file.get_csvField(0,line);
+		rutNoDigit = Integer.parseInt(file.get_csvField(1, line));
+		age = Integer.parseInt(file.get_csvField(2, line));
+		gravedad = Integer.parseInt(file.get_csvField(3, line));
+		//Se obtiene el rut con digito verificador.
+		setRut();
+	}
+	
 	// Muestra los datos de los pacientes.
 	public void showPatientData() throws IOException
 	{
-		System.out.println("Nombre: " + name);
+		System.out.println("\nNombre: " + name);
 		System.out.println("Edad: " + age);
 		System.out.println("Rut: " + rut);
-		System.out.println("Gravdedad: " + gravedad);
+		System.out.println("Gravdedad: " + gravedad + "\n");
 	}	
 
 	// Se obtiene el digito verificador a partir del rut
