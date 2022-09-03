@@ -1,8 +1,8 @@
 import java.io.*;
 import java.util.*;
 
-public class Sistema {
-
+public class Sistema 
+{
 	public static void main(String[] args) throws IOException
 	{
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -17,6 +17,7 @@ public class Sistema {
 		// Clase menu para utilizar sus metodos.
 		Menu menu = new Menu();
 		
+		// While que se termina con la opción 0.
 		while (true)
 		{
 			menu.showMenu();
@@ -27,7 +28,8 @@ public class Sistema {
 				case 1:
 				{
 					Paciente patient = new Paciente();
-					patient.getPatientData();
+					patient.setPatientData();
+					patient.setRut();
 					
 					System.out.println("Ingrese la pieza en donde se quedará el paciente (1-10)");
 					int roomNumber = menu.verifyNumber(1, 10);
@@ -46,7 +48,7 @@ public class Sistema {
 					}
 					else
 					{
-						tmpRoom.setPatients(patient, patient.getRut());
+						tmpRoom.addPatient(patient, patient.getRut());
 					}
 					break;
 				}
@@ -79,6 +81,7 @@ public class Sistema {
 					break;
 				}
 				
+				
 				case 4:
 				{
 					seekPatient(rooms);
@@ -105,10 +108,11 @@ public class Sistema {
 		// Se inicializan las piezas.
 		for (int i = 0 ; i < 10 ; i++)
 		{
-			Pieza tmpRoom = new Pieza();
+			Pieza tmpRoom = new Pieza(i+1);
 			rooms.add(i, tmpRoom);
 		}
 	}
+	
 	
 	public static void seekPatient(ArrayList<Pieza> rooms) throws IOException
 	{
@@ -119,13 +123,13 @@ public class Sistema {
 		Pieza tmp;
 		
 		// Se recorren las piezas
-		for(int i = 0 ; i < 10 ; i = i + 1)
+		for(int i = 0 ; i < 10 ; i++)
 		{
 			// Se obtiene la pieza en la posición i-ésima.
 			tmp = rooms.get(i);
 			
 			// Se busca el paciente en la pieza y si existe se termina el ciclo.
-			if (tmp.search(rut, i) == true) 
+			if (tmp.search(rut) == true) 
 			{
 				return;
 			}		
