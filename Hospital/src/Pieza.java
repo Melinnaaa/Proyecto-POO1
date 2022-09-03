@@ -2,14 +2,17 @@ import java.io.*;
 import java.util.*;
 public class Pieza 
 {
-	private int totalPatients;
+	//private int totalPatients;
 	private int totalBeds;
+	private int roomNumber;
 	private HashMap <String, Paciente> patientsRut;
 	
-	public Pieza ()
+	// Constructor de pieza.
+	public Pieza (int i)
 	{
-		totalPatients = 0;
+		//totalPatients = 0;
 		totalBeds = 5;
+		roomNumber = i;
 		patientsRut = new HashMap<String, Paciente>();
 	}
 
@@ -19,32 +22,37 @@ public class Pieza
 		return patientsRut.size();
 	}
 	
-	// Retorna el mapa de pacientes
-	public HashMap<String, Paciente> getPatientsRut() 
-	{
-		return patientsRut;
-	}
 	
 	// Inserta un paciente en el mapa de pacientes.
-	public void setPatients(Paciente tmp, String rut)
+	public void addPatient(Paciente tmp, String rut)
 	{
 		patientsRut.put(rut, tmp);
 	}
 	
-	// Se encarga de buscar el paciente, retorna true de existir, false de no existir.
-	public boolean search (String rut) throws IOException
+	// Elimina un paciente del mapa.
+	public void deletePatient(String rut) throws IOException
 	{
-		Paciente tmp =  patientsRut.get(rut);
-		// Se comprueba que el paciente exista
-		if (tmp == null) 
-		{
-			return false;
-		}
-		return true;
+		patientsRut.remove(rut);
 	}
 	
+	// Se encarga de buscar el paciente a partir de la gravedad.
+	public void search (int gravity) throws IOException
+	{
+		// Se recorren los pacientes.
+		for (Paciente m : patientsRut.values())
+		{
+			// Se comprueba que la gravedad sea igual.
+			if (m.getGravedad() == gravity ) 
+			{
+				// Muestra los datos del paciente.
+				m.showPatientData();
+			}
+		}
+	}
+	
+	// Sobrecarga
 	// Se encarga de buscar el paciente y imprimir los datos de este si fue encontrado.
-	public boolean search (String rut, int i) throws IOException
+	public boolean search (String rut) throws IOException
 	{
 		Paciente tmp =  patientsRut.get(rut);
 		
@@ -53,8 +61,8 @@ public class Pieza
 		{
 			return false;
 		}
-		System.out.println("El paciente se encuentra en la pieza " + (i+1) + "\n");
-		tmp.showPatients();
+		System.out.println("El paciente se encuentra en la pieza " + roomNumber + "\n");
+		tmp.showPatientData();
 		return true;
 	}
 	
@@ -65,12 +73,7 @@ public class Pieza
 		for (Paciente m : patientsRut.values())
 		{
 			// muestra los datos del paciente.
-			m.showPatients();
+			m.showPatientData();
 		}
-	}
-	
-	public void deletePatient(String rut) throws IOException
-	{
-		patientsRut.remove(rut);
 	}
 }
