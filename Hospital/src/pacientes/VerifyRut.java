@@ -1,3 +1,4 @@
+package pacientes;
 
 public interface VerifyRut 
 {
