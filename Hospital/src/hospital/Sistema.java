@@ -1,0 +1,111 @@
+package hospital;
+import java.io.*;
+import java.util.*;
+
+import util.Impresora;
+import util.Lector;
+import util.Menu;
+
+public class Sistema 
+{
+	public static void main(String[] args) throws IOException
+	{
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		
+		// Opción ingresada por el usuario
+		int opcion;
+		
+		// Se instancia un objeto menu para utilizar sus metodos.
+		Menu menu = new Menu();
+		
+		// Se instancia un objeto sección 
+		Seccion rooms = new Seccion();
+		
+		// Se instancia un objeto impresora, utilizada para mostrar los datos de pacientes
+		Impresora print = new Impresora();
+		
+		// Se instancia un objeto lector, el cual se encarga de leer datos por consolo.
+		Lector l = new Lector(reader);
+		
+		// While que se termina con la opción 0.
+		while (true)
+		{
+			menu.showMenu();
+			opcion = Integer.parseInt(reader.readLine());
+			
+			switch (opcion)
+			{
+				// Agregar paciente.
+				case 1:
+				{
+					System.out.println("Ingrese la pieza en donde se quedará el paciente (1-10)");
+					int roomNumber = l.verifyNumber(1, 10) - 1;
+					print.showAdd(rooms.addPatientRoom(roomNumber, l));
+					break;
+				}
+				
+				// Eliminar paciente.
+				case 2:
+				{
+					String rut = l.readRut();
+					print.showDelete(rooms.deletePatient(rut));
+					break;
+				}
+				
+				// Mostrar pacientes.
+				case 3:
+				{
+					rooms.seekPatients(print);
+					break;
+				}
+				
+				// Buscar paciente.
+				case 4:
+				{
+					String rut = l.readRut();
+					print.showFound(rooms.seekPatient(rut, print));
+					break;
+				}
+				
+				// Mostrar por gravedad.
+				case 5:
+				{
+					
+					int gravedad = l.readGravity();
+					rooms.seekPatients(gravedad, print);
+					break;
+				}
+				
+				// Modificar datos del paciente.
+				case 6:
+				{
+					String rut = l.readRut();
+					print.showEdit(rooms.seekPatient(rut, l));
+					break;
+				}
+				
+				// Mostrar por patologia
+				case 7:
+				{
+					String pathology = l.readPathology();
+					print.showFindPathology(rooms.seekPatients(pathology, print));
+					break;
+				}
+				
+				// Salir
+				case 0:
+				{
+					rooms.exportPatients();
+					return;
+				}
+				
+				// Opcion no valida.
+				default:
+				{
+					System.out.println("Ingrese una opcion valida");
+					break;
+				}
+			}
+		}
+	}
+}
