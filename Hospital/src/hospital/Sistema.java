@@ -2,13 +2,14 @@ package hospital;
 import java.io.*;
 import java.util.*;
 
+import exceptions.RutException;
 import util.Impresora;
 import util.Lector;
 import util.Menu;
 
 public class Sistema 
 {
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args) throws IOException, RutException
 	{
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		
@@ -30,7 +31,7 @@ public class Sistema
 		// While que se termina con la opción 0.
 		while (true)
 		{
-			menu.showMenu();
+			print.showMenu();
 			opcion = l.verifyNumber(0, 7);
 			
 			switch (opcion)
@@ -38,8 +39,8 @@ public class Sistema
 				// Agregar paciente.
 				case 1:
 				{
-					System.out.println("Ingrese la pieza en donde se quedará el paciente (1-10)");
-					int roomNumber = l.verifyNumber(1, 10) - 1;
+					
+					int roomNumber = l.readRoomNumber();
 					print.showAdd(rooms.addPatientRoom(roomNumber, l));
 					break;
 				}
