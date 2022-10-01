@@ -54,7 +54,7 @@ public class Menu
 			}
 			case 6:
 			{
-				tmp = l.setPatientData();
+				tmp = l.setPatientData(tmp.getRoom());
 				break;
 			}
 		}
