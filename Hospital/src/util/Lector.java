@@ -139,6 +139,14 @@ public class Lector
 		return gravity;
 	}
 	
+	// Se lee
+	public int readRoomNumber() throws IOException
+	{
+		System.out.println("Ingrese la pieza en donde se quedará el paciente (1-10)");
+		int roomNumber = verifyNumber(1, 10) - 1;
+		return roomNumber;
+	}
+	
 	// Verifica que el numero esté en el rango indicado
 	public int verifyNumber(int low, int high) throws IOException
 	{
