@@ -7,13 +7,15 @@ public class Paciente extends Persona
 {
 	private String pathology;
 	private int gravedad;
+	private int room;
 
 	// Constructor que inicializa todas las variables con datos de entrada
-	public Paciente(String nombre, int rut, int edad, int gravedad, String pathology) 
+	public Paciente(String nombre, int rut, int edad, int gravedad, String pathology, int room) 
 	{
 		super(nombre, rut, edad);
 		this.gravedad = gravedad;
 		setPathology(pathology);
+		this.room = room;
 	}
 	
 	// Constructor default
@@ -41,6 +43,11 @@ public class Paciente extends Persona
 	{
 		this.pathology = pathology;
 	}	
+	
+	public int getRoom()
+	{
+		return room;
+	}
 	
 	// Muestra los datos de los pacientes.
     @Override
