@@ -2,28 +2,13 @@ package util;
 
 import java.io.IOException;
 
+import exceptions.RutException;
 import pacientes.Paciente;
 
 public class Menu 
-{	
-	// Muestra las opciones del menu
-	public void showMenu()
-	{
-		System.out.println("Bienvenido al Hospital PUCV:");
-		System.out.println("---");
-		System.out.println("1. Agregar Paciente.");
-        System.out.println("2. Eliminar Paciente.");
-        System.out.println("3. Mostrar Pacientes.");
-        System.out.println("4. Buscar paciente.");
-        System.out.println("5. Mostrar paciente por gravedad.");
-        System.out.println("6. Modificar datos paciente.");
-        System.out.println("7. Mostrar por patologia.");
-        System.out.println("0. Salir.");
-        System.out.println("---");
-	}
-	
+{		
 	// Menu de edicion de datos del paciente.
-	public Paciente editPatientMenu(Paciente tmp, int op, Lector l) throws IOException
+	public Paciente editPatientMenu(Paciente tmp, int op, Lector l) throws IOException, RutException
 	{
 		switch (op)
 		{
@@ -35,6 +20,7 @@ public class Menu
 			case 2:
 			{
 				tmp.setRut(l.readRutNoDigit());
+				tmp.setRut();
 				break;
 			}
 			case 3:
@@ -54,11 +40,19 @@ public class Menu
 			}
 			case 6:
 			{
-				tmp = l.setPatientData(tmp.getRoom());
+				try
+				{
+					tmp = l.setPatientData(tmp.getRoom());
+				}
+				catch (RutException e)
+				{
+					System.out.println("Error: " + e.getMessage());
+					l.setPatientData(tmp);
+				}
+				tmp.setRut();
 				break;
 			}
 		}
-		tmp.setRut();
 		return tmp;
 	}
 }
