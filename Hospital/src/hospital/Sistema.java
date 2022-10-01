@@ -79,8 +79,7 @@ public class Sistema
 				// Modificar datos del paciente.
 				case 6:
 				{
-					String rut = l.readRut();
-					print.showEdit(rooms.seekPatient(rut, l));
+					print.showFound(rooms.seekPatient(print, menu, l));
 					break;
 				}
 				
