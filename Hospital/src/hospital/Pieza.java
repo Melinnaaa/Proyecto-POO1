@@ -1,6 +1,8 @@
 package hospital;
 import java.io.*;
 import java.util.*;
+
+import pacientes.Doctor;
 import pacientes.Paciente;
 import util.Impresora;
 
@@ -9,14 +11,16 @@ public class Pieza
 	//private int totalPatients;
 	private int totalBeds;
 	private int roomNumber;
+	private Doctor doc;
 	private HashMap <String, Paciente> patientsRut;
 	
 	// Constructor de pieza.
-	public Pieza (int i)
+	public Pieza (int i, Doctor doc)
 	{
 		//totalPatients = 0;
 		totalBeds = 5;
 		roomNumber = i;
+		this.doc = doc;
 		patientsRut = new HashMap<String, Paciente>();
 	}
 	
@@ -124,8 +128,8 @@ public class Pieza
 		    	fw.append(p.getRutNoDigit() + ",");
 		    	fw.append(p.getAge() + ",");
 		    	fw.append(p.getGravedad() + ",");
-		    	fw.append(p.getPathology());
-		    	fw.append("\n");
+		    	fw.append(p.getPathology() + ",");
+		    	fw.append(p.getRoom() + "\n");
 			}
 		}
 		catch(IOException e)
@@ -133,14 +137,4 @@ public class Pieza
 			e.printStackTrace();
 		}
 	}
-	
-	/* Modifica los datos de los pacientes 
-	public boolean editPatient (Paciente patient) throws IOException
-	{
-		tmp.editData();
-		tmp.setRut();
-		patientsRut.remove(rut);
-		patientsRut.put(tmp.getRut(), tmp);
-		return true;
-	}*/
 }
