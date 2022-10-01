@@ -95,6 +95,7 @@ public class Sistema
 				case 0:
 				{
 					rooms.exportPatients();
+					rooms.generateReport();
 					return;
 				}
 			}
