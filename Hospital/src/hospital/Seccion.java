@@ -2,6 +2,7 @@ package hospital;
 import java.io.*;
 import java.util.*;
 
+import exceptions.RutException;
 import import_export.CSV;
 import import_export.ImportExport;
 import util.Impresora;
@@ -49,7 +50,7 @@ public class Seccion
 		
 	// Sobrecarga
 	// Busca un paciente y lo edita.
-	public boolean seekPatient(Impresora print, Menu m, Lector l) throws IOException
+	public boolean seekPatient(Impresora print, Menu m, Lector l) throws IOException, RutException
 	{
 		Pieza tmpRoom;
 		Paciente tmpPatient;
@@ -135,9 +136,18 @@ public class Seccion
 		{	
 			return false;
 		}
-		
+		Paciente patient = new Paciente();
 		// Se instancia un objeto paciente y se guardan los datos ingresados por el usuario.
-		Paciente patient = l.setPatientData(tmpRoom.getRoomNumber());
+		try
+		{
+			patient = l.setPatientData(tmpRoom.getRoomNumber());
+		}
+		catch (RutException e)
+		{
+			System.out.println("Error: " + e.getMessage());
+			l.setPatientData(patient);
+			return true;
+		}
 				
 		// Se revisa que el paciente no se encuentre en el hospital.
 		if (tmpRoom.search(patient.getRut()) == null)
@@ -152,6 +162,7 @@ public class Seccion
 	public boolean deletePatient(String rut) throws IOException
 	{
 		Pieza tmpRoom;
+		// Recorremos las piezas
 		for (int i = 0 ; i < 10 ; i++)
 		{
 			tmpRoom = rooms.get(i);
