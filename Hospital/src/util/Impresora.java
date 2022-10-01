@@ -21,6 +21,7 @@ public class Impresora
         System.out.println("Patologia: " + tmp.getPathology() + "\n");
 	}
 	
+	// Se muestran los datos del doctor
 	public void showDoctor(Doctor tmp)
 	{
 		System.out.println("Especialidad: " + tmp.getSpecialty());
@@ -77,6 +78,23 @@ public class Impresora
 		}
 	}
 	
+	// Muestra las opciones del menu
+	public void showMenu()
+	{
+		System.out.println("Bienvenido al Hospital PUCV:");
+		System.out.println("---");
+		System.out.println("1. Agregar Paciente.");
+        System.out.println("2. Eliminar Paciente.");
+        System.out.println("3. Mostrar Pacientes.");
+        System.out.println("4. Buscar paciente.");
+        System.out.println("5. Mostrar paciente por gravedad.");
+        System.out.println("6. Modificar datos paciente.");
+        System.out.println("7. Mostrar por patologia.");
+        System.out.println("0. Salir.");
+        System.out.println("---");
+	}
+	
+	// Muestra el menu de editar
 	public void showEditMenu()
 	{
 		System.out.println("---");
@@ -88,6 +106,5 @@ public class Impresora
         System.out.println("6. Editar todo.");
         System.out.println("7. Mostrar por patologia.");
         System.out.println("0. Salir.");
-		
 	}
 }
