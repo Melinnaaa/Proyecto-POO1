@@ -121,7 +121,7 @@ public class Pieza
 			for (Paciente p : patientsRut.values())
 			{
 				fw.append(p.getName() + ",");
-		    	fw.append(p.getRut() + ",");
+		    	fw.append(p.getRutNoDigit() + ",");
 		    	fw.append(p.getAge() + ",");
 		    	fw.append(p.getGravedad() + ",");
 		    	fw.append(p.getPathology());
