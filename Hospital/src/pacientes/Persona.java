@@ -31,6 +31,11 @@ public class Persona implements VerifyRut
 		return rut;
 	}
 	
+	public int getRutNoDigit()
+	{
+		return rutNoDigit;
+	}
+	
 	public void setName(String name) 
 	{
 		this.name = name;
