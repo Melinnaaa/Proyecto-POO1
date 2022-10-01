@@ -99,26 +99,4 @@ public class Lector
 		
 		return n;
 	}
-	
-	public Paciente editPatient () throws IOException
-	{
-		// Se reingresan los datos del paciente
-        System.out.println("Reingrese el nombre del paciente:");
-        String name = bf.readLine();
-        
-        System.out.println("Reingrese el rut del paciente, sin digito verificador:");
-        int rut = Integer.parseInt(bf.readLine());
-        
-        System.out.println("Reingrese la edad del paciente:");
-        int age = Integer.parseInt(bf.readLine());
-        
-        System.out.println("Reingrese la gravedad del paciente:");
-        int gravedad = Integer.parseInt(bf.readLine());
-        
-        System.out.println("Reingrese la patologia del paciente:");
-        String pathology = bf.readLine();
-    
-        Paciente tmp = new Paciente(name, rut, age, gravedad, pathology);
-        return tmp;
-	}
 }
