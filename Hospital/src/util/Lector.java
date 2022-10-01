@@ -49,15 +49,39 @@ public class Lector
 	// Se lee la patologia ingresada
 	public String readPathology () throws IOException
 	{
-		System.out.println("Ingrese la patologia.");
+		System.out.println("Ingrese la patologia del paciente.");
 		String pathology = bf.readLine();
 		return pathology;
+	}
+	
+	// Se lee el nombre ingresado
+	public String readName () throws IOException
+	{
+		System.out.println("Ingrese el nombre del paciente.");
+		String name = bf.readLine();
+		return name;
+	}
+	
+	// Se lee la edad
+	public int readAge() throws IOException
+	{
+		System.out.println("Ingrese la edad del paciente.");
+		int age = Integer.parseInt(bf.readLine());
+		return age;
+	}
+	
+	// Lee el rut sin digito
+	public int readRutNoDigit() throws IOException
+	{
+		System.out.println("Ingrese el rut del paciente sin digito verificador.");
+		int rut = Integer.parseInt(bf.readLine());
+		return rut;
 	}
 	
 	// Se lee la gravedad ingresada
 	public int readGravity() throws IOException
 	{
-		System.out.println("Ingrese la gravedad del paciente a mostrar (1-3)");
+		System.out.println("Ingrese la gravedad del paciente (1-3)");
 		int gravity = verifyNumber(1,3);
 		return gravity;
 	}
