@@ -15,7 +15,7 @@ public class Lector
 	}
 	
 	// Se guardan los datos del paciente leidos por consola
-	public Paciente setPatientData() throws IOException
+	public Paciente setPatientData(int room) throws IOException
 	{
 	    // Se obtienen los datos del paciente
 	    System.out.println("Ingrese el nombre del paciente:");
@@ -34,7 +34,7 @@ public class Lector
         String pathology = bf.readLine();
         
         // Se guardan los datos del ingresados.
-        Paciente tmpPatient = new Paciente(name, rut, age, gravedad, pathology);  
+        Paciente tmpPatient = new Paciente(name, rut, age, gravedad, pathology, room);  
         return tmpPatient;
 	}
 	
