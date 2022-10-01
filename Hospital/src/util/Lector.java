@@ -2,6 +2,7 @@ package util;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import exceptions.RutException;
 import pacientes.Paciente;
 
 public class Lector 
@@ -15,14 +16,31 @@ public class Lector
 	}
 	
 	// Se guardan los datos del paciente leidos por consola
-	public Paciente setPatientData(int room) throws IOException
+	public Paciente setPatientData(int room) throws IOException, RutException
 	{
 	    // Se obtienen los datos del paciente
 	    System.out.println("Ingrese el nombre del paciente:");
 	    String name = bf.readLine();
 	    
+	    
 	    System.out.println("Ingrese el rut del paciente, sin digito verificador:");
-	    int rut = Integer.parseInt(bf.readLine());
+	    String rut = bf.readLine();
+	    
+	    // Comprobamos que el rut no contenga caracteres.
+	    boolean isNumeric = rut.chars().allMatch( Character::isDigit );
+	    int rutNoDigit;
+	    
+	    // De no contenerlos de transforma a int
+	    if(isNumeric == true)
+	    {
+	    	rutNoDigit = Integer.parseInt(rut);
+	    }
+	    
+	    // Por otro lado se lanza el error
+	    else 
+	   	{
+	    	throw new  RutException();
+	    }
 	    
 	    System.out.println("Ingrese la edad del paciente:");
 	    int age = Integer.parseInt(bf.readLine());
@@ -33,9 +51,33 @@ public class Lector
         System.out.println("Ingrese la patologia del paciente:");
         String pathology = bf.readLine();
         
-        // Se guardan los datos del ingresados.
-        Paciente tmpPatient = new Paciente(name, rut, age, gravedad, pathology, room);  
+        // Se guardan los datos del ingresados instanciando un objeto paciente.
+        Paciente tmpPatient = new Paciente(name, rutNoDigit, age, gravedad, pathology, room);  
         return tmpPatient;
+	}
+	
+	// Sobrecarga
+	// Se guardan los datos del paciente leidos por consola
+	public void setPatientData(Paciente tmp) throws IOException
+	{
+	    // Se obtienen los datos del paciente
+	    System.out.println("Ingrese el nombre del paciente:");
+	    tmp.setName(bf.readLine());
+	    
+	    // Se lee el rut sin digitos correctamente
+	    tmp.setRut(readRutNoDigit());
+	    
+	    // Se lee la edad
+	    System.out.println("Ingrese la edad del paciente:");
+	    tmp.setAge(Integer.parseInt(bf.readLine()));
+	    
+	    // Se lee la gravedad
+	    System.out.println("Ingrese la gravedad del paciente:");
+        tmp.setGravedad(Integer.parseInt(bf.readLine()));
+        
+        // Se lee la patologia
+        System.out.println("Ingrese la patologia del paciente:");
+        tmp.setPathology(bf.readLine());
 	}
 	
 	// Se lee el rut ingresado
@@ -73,9 +115,20 @@ public class Lector
 	// Lee el rut sin digito
 	public int readRutNoDigit() throws IOException
 	{
-		System.out.println("Ingrese el rut del paciente sin digito verificador.");
-		int rut = Integer.parseInt(bf.readLine());
-		return rut;
+	    String rut;
+	    boolean isNumeric;
+	    //Se lee hasta que el rut no contenga caracteres.
+	    do
+	    {
+	    	System.out.println("Ingrese el rut del paciente sin digito verificador y sin puntos.");
+			rut = bf.readLine();
+			
+			// Comprobamos que el rut no contenga caracteres.
+		    isNumeric = rut.chars().allMatch( Character::isDigit );
+	    }while(isNumeric == false);
+	    
+	    int rutNoDigit = Integer.parseInt(rut);
+		return rutNoDigit;
 	}
 	
 	// Se lee la gravedad ingresada
