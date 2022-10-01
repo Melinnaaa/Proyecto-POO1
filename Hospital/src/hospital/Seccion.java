@@ -38,20 +38,20 @@ public class Seccion
 	// Exporta los pacientes de todas las piezas.
 	 public void exportPatients() 
 	 {
-    	try 
-    	{
-    		FileWriter fw = new FileWriter("C:\\Users\\artur\\Desktop\\HospitalexportPatiens.csv");
+		try 
+		{
+			FileWriter fw = new FileWriter("patients.csv");
 	        for(int i = 0; i < rooms.size(); i++) 
 	        {
 	        	Pieza p = rooms.get(i);
 	        	p.exportPatients(fw); 
-	       }
+	        }
 	        
 	       fw.flush(); 
 	       fw.close();
 		} 
-    	catch (IOException e) 
-    	{
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
 	}
@@ -95,11 +95,12 @@ public class Seccion
 	}
 		
 	// Sobrecarga
-	// Edita un paciente
-	public boolean seekPatient(String rut, Lector l) throws IOException
+	// Busca un paciente y lo edita.
+	public boolean seekPatient(Impresora print, Menu m, Lector l) throws IOException
 	{
 		Pieza tmpRoom;
 		Paciente tmpPatient;
+		String rut = l.readRut();
 		for (int i = 0; i < 10; i++)
 		{
 			// Se obtiene la pieza en la posición i-ésima.
@@ -108,9 +109,17 @@ public class Seccion
 			// Se asigna el paciente
 			tmpPatient = tmpRoom.search(rut);
 			
+			// Si el paciente se encontró.
 			if (tmpPatient != null)
 			{
-				tmpPatient = l.editPatient();
+				print.showEditMenu();
+				int op = l.verifyNumber(0, 6);
+				if (op == 0)
+				{
+					return true;
+				}
+				tmpPatient = m.editPatientMenu(tmpPatient, op, l);
+				// Se elimina del mapa y se vuelve a agregar (por si cambian el rut, la clave cambia).
 				tmpRoom.deletePatient(rut);
 				tmpRoom.addPatient(tmpPatient, tmpPatient.getRut());
 				return true;
