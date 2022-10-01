@@ -23,8 +23,8 @@ public class Impresora
 	
 	public void showDoctor(Doctor tmp)
 	{
-		System.out.println("Gravdedad: " + tmp.getSpecialty());
-        System.out.println("Patologia: " + tmp.getWorkRoom() + "\n");
+		System.out.println("Especialidad: " + tmp.getSpecialty());
+        System.out.println("Habitacion de trabajo: " + tmp.getWorkRoom() + "\n");
 	}
 	
 	// Se muestra el numero de la pieza
