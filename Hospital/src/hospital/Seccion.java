@@ -1,7 +1,9 @@
 package hospital;
 import java.io.*;
 import java.util.*;
-import util.CSV;
+
+import import_export.CSV;
+import import_export.ImportExport;
 import util.Impresora;
 import util.Lector;
 import util.Menu;
@@ -16,89 +18,7 @@ public class Seccion
 	
 	public Seccion () throws IOException
 	{
-		importPatients();
-	}
-	
-	// Se importan los pacientes desde un archivo csv.
-	public void importPatients() throws IOException
-	{
-		CSV fileDoc = new CSV("doctores");
-		String lineDoc = fileDoc.firstLine();
-		
-		// Se inicializan las piezas.
-		for (int i = 0 ; i < 10 ; i++)
-		{
-			Doctor doc = readData(fileDoc, lineDoc); 
-			// Se instancia cada casilla del arrayLista con una pieza
-			Pieza room = new Pieza(i+1, doc);
-			rooms.add(i, room);
-			lineDoc = fileDoc.nextLine();
-		}
-		
-		// Se abre el arhivo y se comienza en la primera linea.
-		CSV file = new CSV("patients");
-		String line = file.firstLine();
-		Pieza tmpRoom; 
-		
-		// Mientras exista una linea con datos
-		while (file.get_csvField(0,line) != null)
-		{
-			// Leemos los datos del paciente en dicha linea
-			Paciente tmpPacient = readData(line, file);
-			// Buscamos la pieza que le corresponde
-			tmpRoom = rooms.get(tmpPacient.getRoom() - 1);
-			// Lo añadimos a su pieza correspondiente
-			tmpRoom.addPatient(tmpPacient, tmpPacient.getRut());
-			line = file.nextLine();
-		}
-		file.close();
-	}
-	
-	// Exporta los pacientes de todas las piezas.
-	 public void exportPatients() 
-	 {
-		try 
-		{
-			FileWriter fw = new FileWriter("patients.csv");
-	        for(int i = 0; i < rooms.size(); i++) 
-	        {
-	        	Pieza p = rooms.get(i);
-	        	p.exportPatients(fw); 
-	        }
-	        
-	       fw.flush(); 
-	       fw.close();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	// Lee el archivo csv de pacientes.
-	public Paciente readData(String line, CSV file)
-    {
-		String name = file.get_csvField(0,line);
-        int rut = Integer.parseInt(file.get_csvField(1, line));
-        int age = Integer.parseInt(file.get_csvField(2, line));
-        int gravedad = Integer.parseInt(file.get_csvField(3, line));
-        String pathology = file.get_csvField(4, line);
-        int room = Integer.parseInt(file.get_csvField(5, line));
-        Paciente tmpPatient = new Paciente(name, rut, age, gravedad, pathology, room);
-        return tmpPatient;
-    }
-	
-	// Sobrecarga
-	// Lee el archivo csv de doctores.
-	public Doctor readData(CSV file, String line)
-	{
-		String name = file.get_csvField(0,line);
-        int rut = Integer.parseInt(file.get_csvField(1, line));
-        int age = Integer.parseInt(file.get_csvField(2, line));
-        String specialty = file.get_csvField(3, line);
-        int workRoom = Integer.parseInt(file.get_csvField(4, line));
-        Doctor tmp = new Doctor(name, rut, age, specialty, workRoom);
-		return tmp;
+		importCsv();
 	}
 		
 	// Recorre el arrayList de piezas y para encontrar al paciente a partir del rut
@@ -243,5 +163,86 @@ public class Seccion
 			}
 		}
 		return false;
+	}
+	
+	// Se importan los pacientes desde un archivo csv.
+	public void importCsv() throws IOException
+	{
+		// Se abre el archivo de doctores
+		ImportExport r = new ImportExport();
+		CSV fileDoc = new CSV("doctores");
+		String lineDoc = fileDoc.firstLine();
+		
+		// Se abre el arhivo csv de pacientes y se comienza en la primera linea.
+		CSV file = new CSV("patients");
+		String line = file.firstLine();
+		Pieza tmpRoom; 
+		
+		// Se inicializan las piezas.
+		for (int i = 0 ; i < 10 ; i++)
+		{
+			Doctor doc = r.readData(fileDoc, lineDoc); 
+			// Se instancia cada casilla del arrayLista con una pieza
+			Pieza room = new Pieza(i+1, doc);
+			rooms.add(i, room);
+			lineDoc = fileDoc.nextLine();
+		}	
+		
+		// Mientras exista una linea con datos
+		while (file.get_csvField(0,line) != null)
+		{
+			// Leemos los datos del paciente en dicha linea
+			Paciente tmpPacient = r.readData(line, file);
+			// Buscamos la pieza que le corresponde
+			tmpRoom = rooms.get(tmpPacient.getRoom() - 1);
+			// Lo añadimos a su pieza correspondiente
+			tmpRoom.addPatient(tmpPacient, tmpPacient.getRut());
+			line = file.nextLine();
+		}
+		file.close();
+	}
+	
+	// Exporta los pacientes de todas las piezas.
+	public void exportPatients() 
+	{
+		try 
+		{
+			FileWriter fw = new FileWriter("patients.csv");
+	        for(int i = 0; i < rooms.size(); i++) 
+	        {
+	        	Pieza p = rooms.get(i);
+	        	p.exportPatients(fw); 
+	        }
+	        
+	       fw.flush(); 
+	       fw.close();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	// Exporta los pacientes de todas las piezas.
+	public void generateReport() 
+	{
+		try 
+		{
+			FileWriter fw = new FileWriter("report.txt");
+	        for(int i = 0; i < rooms.size(); i++) 
+	        {
+	        	fw.write("Pacientes en la pieza " + (i+1) + ":\n\n");
+	        	Pieza p = rooms.get(i);
+	        	p.generateReport(fw); 
+	        	fw.append("\n");
+	        }
+	        
+	       fw.flush(); 
+	       fw.close();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 }

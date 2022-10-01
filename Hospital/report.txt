@@ -1,0 +1,100 @@
+Pacientes en la pieza 1:
+
+Doctor a cargo de la pieza: Iban Pizarro
+
+Nombre: Joaquin Reyes
+Rut: 21214711
+Edad: 19
+Gravedad: 1
+Patologia: Resfriado
+
+Pacientes en la pieza 2:
+
+Doctor a cargo de la pieza: Maria Pilar
+
+Nombre: Camila Diaz
+Rut: 21071085
+Edad: 20
+Gravedad: 2
+Patologia: Covid-19
+
+Pacientes en la pieza 3:
+
+Doctor a cargo de la pieza: Naiara Baez
+
+Nombre: Javier Marin
+Rut: 20441061
+Edad: 21
+Gravedad: 1
+Patologia: Bronquitis
+
+Pacientes en la pieza 4:
+
+Doctor a cargo de la pieza: Jorge Luis Acedo
+
+Nombre: Ruth Caceres
+Rut: 17947712
+Edad: 42
+Gravedad: 3
+Patologia: Influenza
+
+Pacientes en la pieza 5:
+
+Doctor a cargo de la pieza: German Lloret
+
+Nombre: Alejandro Reyes
+Rut: 13544821
+Edad: 43
+Gravedad: 2
+Patologia: Bronquitis
+
+Pacientes en la pieza 6:
+
+Doctor a cargo de la pieza: Ibrahim Amor
+
+Nombre: Macarena Morel
+Rut: 13881821
+Edad: 44
+Gravedad: 3
+Patologia: Hepatitis
+
+Pacientes en la pieza 7:
+
+Doctor a cargo de la pieza: Serafina Neira
+
+Nombre: Fernando Diaz
+Rut: 13989624
+Edad: 41
+Gravedad: 2
+Patologia: Cirrosis
+
+Pacientes en la pieza 8:
+
+Doctor a cargo de la pieza: Agustina Manrique
+
+Nombre: Gabriel Jesus
+Rut: 15881021
+Edad: 29
+Gravedad: 2
+Patologia: Cancer
+
+Pacientes en la pieza 9:
+
+Doctor a cargo de la pieza: Beatriz Mateos
+
+Nombre: Ignacio Araya
+Rut: 13021346
+Edad: 35
+Gravedad: 3
+Patologia: Leucemia
+
+Pacientes en la pieza 10:
+
+Doctor a cargo de la pieza: Jose Gabriel Berrocal
+
+Nombre: Esteban Paredes
+Rut: 14021349
+Edad: 41
+Gravedad: 3
+Patologia: Laringitis
+
