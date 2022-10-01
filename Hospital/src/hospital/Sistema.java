@@ -31,7 +31,7 @@ public class Sistema
 		while (true)
 		{
 			menu.showMenu();
-			opcion = Integer.parseInt(reader.readLine());
+			opcion = l.verifyNumber(0, 7);
 			
 			switch (opcion)
 			{
@@ -96,13 +96,6 @@ public class Sistema
 				{
 					rooms.exportPatients();
 					return;
-				}
-				
-				// Opcion no valida.
-				default:
-				{
-					System.out.println("Ingrese una opcion valida");
-					break;
 				}
 			}
 		}
