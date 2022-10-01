@@ -22,6 +22,7 @@ public class Menu
         System.out.println("---");
 	}
 	
+	// Menu de edicion de datos del paciente.
 	public Paciente editPatientMenu(Paciente tmp, int op, Lector l) throws IOException
 	{
 		switch (op)
@@ -53,11 +54,7 @@ public class Menu
 			}
 			case 6:
 			{
-				tmp.setName(l.readName());
-				tmp.setRut(l.readRutNoDigit());
-				tmp.setAge(l.readAge());
-				tmp.setGravedad(l.readGravity());
-				tmp.setPathology(l.readPathology());
+				tmp = l.setPatientData();
 				break;
 			}
 		}
