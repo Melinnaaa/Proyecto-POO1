@@ -1,9 +1,5 @@
 package pacientes;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-
-import util.CSV;
 import util.Impresora;
 
 public class Persona implements VerifyRut
