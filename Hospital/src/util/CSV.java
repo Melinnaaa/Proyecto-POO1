@@ -120,6 +120,11 @@ public class CSV
      */
     public String get_csvField(int field,String line)
     {
+    	if (line == null)
+    	{
+    		return null;
+    	}
+    	
         Scanner s = new Scanner(line);
         int index =(0);
         s.useDelimiter(",|\\n");
