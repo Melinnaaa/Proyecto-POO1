@@ -42,5 +42,4 @@ public class Doctor extends Persona
         super.showData(print);
         print.showDoctor(this);
     }
-	
 }
