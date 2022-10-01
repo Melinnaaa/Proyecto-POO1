@@ -137,4 +137,24 @@ public class Pieza
 			e.printStackTrace();
 		}
 	}
+	
+	public void generateReport(FileWriter fw)
+	{
+		try
+		{
+			fw.append("Doctor a cargo de la pieza: " + doc.getName() + "\n\n");
+			for (Paciente p : patientsRut.values())
+			{
+				fw.append("Nombre: " + p.getName() + "\n");
+		    	fw.append("Rut: " + p.getRutNoDigit() + "\n");
+		    	fw.append("Edad: " + p.getAge() + "\n");
+		    	fw.append("Gravedad: " + p.getGravedad() + "\n");
+		    	fw.append("Patologia: " + p.getPathology() + "\n");
+			}
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 }
