@@ -1,4 +1,9 @@
 package util;
+
+import java.io.IOException;
+
+import pacientes.Paciente;
+
 public class Menu 
 {	
 	// Muestra las opciones del menu
@@ -15,5 +20,48 @@ public class Menu
         System.out.println("7. Mostrar por patologia.");
         System.out.println("0. Salir.");
         System.out.println("---");
+	}
+	
+	public Paciente editPatientMenu(Paciente tmp, int op, Lector l) throws IOException
+	{
+		switch (op)
+		{
+			case 1:
+			{
+				tmp.setName(l.readName());
+				break;
+			}
+			case 2:
+			{
+				tmp.setRut(l.readRutNoDigit());
+				break;
+			}
+			case 3:
+			{
+				tmp.setAge(l.readAge());
+				break;
+			}
+			case 4:
+			{
+				tmp.setGravedad(l.readGravity());
+				break;
+			}
+			case 5:
+			{
+				tmp.setPathology(l.readPathology());
+				break;
+			}
+			case 6:
+			{
+				tmp.setName(l.readName());
+				tmp.setRut(l.readRutNoDigit());
+				tmp.setAge(l.readAge());
+				tmp.setGravedad(l.readGravity());
+				tmp.setPathology(l.readPathology());
+				break;
+			}
+		}
+		tmp.setRut();
+		return tmp;
 	}
 }
