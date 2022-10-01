@@ -5,6 +5,7 @@ import util.CSV;
 import util.Impresora;
 import util.Lector;
 import util.Menu;
+import pacientes.Doctor;
 import pacientes.Paciente;
 
 
@@ -21,14 +22,32 @@ public class Seccion
 	// Se importan los pacientes desde un archivo csv.
 	public void importPatients() throws IOException
 	{
-		CSV file = new CSV("patients");
-		String line = file.firstLine();
+		CSV fileDoc = new CSV("doctores");
+		String lineDoc = fileDoc.firstLine();
+		
 		// Se inicializan las piezas.
 		for (int i = 0 ; i < 10 ; i++)
 		{
-			Pieza tmpRoom = new Pieza(i+1);
-			rooms.add(i, tmpRoom);
+			Doctor doc = readData(fileDoc, lineDoc); 
+			// Se instancia cada casilla del arrayLista con una pieza
+			Pieza room = new Pieza(i+1, doc);
+			rooms.add(i, room);
+			lineDoc = fileDoc.nextLine();
+		}
+		
+		// Se abre el arhivo y se comienza en la primera linea.
+		CSV file = new CSV("patients");
+		String line = file.firstLine();
+		Pieza tmpRoom; 
+		
+		// Mientras exista una linea con datos
+		while (file.get_csvField(0,line) != null)
+		{
+			// Leemos los datos del paciente en dicha linea
 			Paciente tmpPacient = readData(line, file);
+			// Buscamos la pieza que le corresponde
+			tmpRoom = rooms.get(tmpPacient.getRoom() - 1);
+			// Lo añadimos a su pieza correspondiente
 			tmpRoom.addPatient(tmpPacient, tmpPacient.getRut());
 			line = file.nextLine();
 		}
@@ -56,7 +75,7 @@ public class Seccion
 		}
 	}
 	
-	// Lee el archivo csv
+	// Lee el archivo csv de pacientes.
 	public Paciente readData(String line, CSV file)
     {
 		String name = file.get_csvField(0,line);
@@ -64,9 +83,23 @@ public class Seccion
         int age = Integer.parseInt(file.get_csvField(2, line));
         int gravedad = Integer.parseInt(file.get_csvField(3, line));
         String pathology = file.get_csvField(4, line);
-        Paciente tmpPatient = new Paciente(name, rut, age, gravedad, pathology);
+        int room = Integer.parseInt(file.get_csvField(5, line));
+        Paciente tmpPatient = new Paciente(name, rut, age, gravedad, pathology, room);
         return tmpPatient;
     }
+	
+	// Sobrecarga
+	// Lee el archivo csv de doctores.
+	public Doctor readData(CSV file, String line)
+	{
+		String name = file.get_csvField(0,line);
+        int rut = Integer.parseInt(file.get_csvField(1, line));
+        int age = Integer.parseInt(file.get_csvField(2, line));
+        String specialty = file.get_csvField(3, line);
+        int workRoom = Integer.parseInt(file.get_csvField(4, line));
+        Doctor tmp = new Doctor(name, rut, age, specialty, workRoom);
+		return tmp;
+	}
 		
 	// Recorre el arrayList de piezas y para encontrar al paciente a partir del rut
 	public boolean seekPatient(String rut, Impresora print) throws IOException
@@ -184,7 +217,7 @@ public class Seccion
 		}
 		
 		// Se instancia un objeto paciente y se guardan los datos ingresados por el usuario.
-		Paciente patient = l.setPatientData();
+		Paciente patient = l.setPatientData(tmpRoom.getRoomNumber());
 				
 		// Se revisa que el paciente no se encuentre en el hospital.
 		if (tmpRoom.search(patient.getRut()) == null)
