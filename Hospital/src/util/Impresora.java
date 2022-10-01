@@ -1,5 +1,6 @@
 package util;
 import hospital.Pieza;
+import pacientes.Doctor;
 import pacientes.Paciente;
 import pacientes.Persona;
 
@@ -18,6 +19,12 @@ public class Impresora
 	{
 		System.out.println("Gravdedad: " + tmp.getGravedad());
         System.out.println("Patologia: " + tmp.getPathology() + "\n");
+	}
+	
+	public void showDoctor(Doctor tmp)
+	{
+		System.out.println("Gravdedad: " + tmp.getSpecialty());
+        System.out.println("Patologia: " + tmp.getWorkRoom() + "\n");
 	}
 	
 	// Se muestra el numero de la pieza
@@ -70,11 +77,17 @@ public class Impresora
 		}
 	}
 	
-	public void showEdit(boolean result)
+	public void showEditMenu()
 	{
-		if (result == false)
-		{
-			System.out.println("El paciente a editar no existe.\n");
-		}
+		System.out.println("---");
+		System.out.println("1. Editar Nombre.");
+        System.out.println("2. Editar Rut.");
+        System.out.println("3. Editar Edad.");
+        System.out.println("4. Editar Gravedad.");
+        System.out.println("5. Editar Patologia.");
+        System.out.println("6. Editar todo.");
+        System.out.println("7. Mostrar por patologia.");
+        System.out.println("0. Salir.");
+		
 	}
 }
