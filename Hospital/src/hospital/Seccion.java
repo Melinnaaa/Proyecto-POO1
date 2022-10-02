@@ -2,6 +2,8 @@ package hospital;
 import java.io.*;
 import java.util.*;
 
+import exceptions.AgeException;
+import exceptions.GravityException;
 import exceptions.RutException;
 import import_export.CSV;
 import import_export.ImportExport;
@@ -142,11 +144,24 @@ public class Seccion
 		{
 			patient = l.setPatientData(tmpRoom.getRoomNumber());
 		}
+		// Rut ingresado es invalido.
 		catch (RutException e)
 		{
 			System.out.println("Error: " + e.getMessage());
 			l.setPatientData(patient);
 			return true;
+		}
+		// La edad ingresada es negativa.
+		catch (AgeException e)
+		{
+			System.out.println("Error: " + e.getMessage());
+			l.setPatientData(patient);
+		}
+		// La gravedad es numerica o supera el rango.
+		catch (GravityException e)
+		{
+			System.out.println("Error: " + e.getMessage());
+			l.setPatientData(patient);
 		}
 				
 		// Se revisa que el paciente no se encuentre en el hospital.
