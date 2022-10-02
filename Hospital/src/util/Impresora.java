@@ -104,7 +104,6 @@ public class Impresora
         System.out.println("4. Editar Gravedad.");
         System.out.println("5. Editar Patologia.");
         System.out.println("6. Editar todo.");
-        System.out.println("7. Mostrar por patologia.");
         System.out.println("0. Salir.");
 	}
 }
