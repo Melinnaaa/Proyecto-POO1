@@ -172,6 +172,31 @@ public class Seccion
 		}
 		return false;	
 	}
+        
+        // Sobrecarga
+        // Añade un paciente a la pieza indicada, utilizado para swing.
+	public boolean addPatientRoom(int roomNumber, String name, int rut, int edad, int gravedad, String patologia) throws IOException
+	{	
+		Pieza tmpRoom;
+		tmpRoom = rooms.get(roomNumber);
+		
+		// Se revisa que la pieza no este llena.
+		if (tmpRoom.getTotalPatients() == 5)
+		{	
+			return false;
+		}
+                		// Se instancia un objeto paciente y se guardan los datos ingresados por el usuario.
+		Paciente patient = new Paciente(name, rut ,edad ,gravedad, patologia, roomNumber);
+
+		// Se revisa que el paciente no se encuentre en el hospital.
+		if (tmpRoom.search(patient.getRut()) == null)
+		{
+			tmpRoom.addPatient(patient, patient.getRut());
+                        exportPatients();
+			return true;
+		}
+		return false;	
+	}
 	
 	// Se elimina el paciente indicado
 	public boolean deletePatient(String rut) throws IOException
