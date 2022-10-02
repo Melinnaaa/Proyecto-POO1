@@ -240,6 +240,7 @@ public class Seccion
 		try 
 		{
 			FileWriter fw = new FileWriter("report.txt");
+			// Se recorren las piezas
 	        for(int i = 0; i < rooms.size(); i++) 
 	        {
 	        	fw.write("Pacientes en la pieza " + (i+1) + ":\n\n");
