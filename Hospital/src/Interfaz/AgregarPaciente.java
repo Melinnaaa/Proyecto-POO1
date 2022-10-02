@@ -54,11 +54,11 @@ public class AgregarPaciente extends JFrame {
 				dispose();
 			}
 		});
-		volverAPrincipal.setBounds(286, 324, 166, 32);
+		volverAPrincipal.setBounds(282, 354, 166, 32);
 		contentPane.add(volverAPrincipal);
 		
 		JTextArea nombrePaciente = new JTextArea();
-		nombrePaciente.setBounds(282, 40, 166, 22);
+		nombrePaciente.setBounds(282, 45, 166, 22);
 		contentPane.add(nombrePaciente);
 		
 		JLabel ingreseNombre = new JLabel("Ingrese nombre del paciente:");
@@ -68,11 +68,38 @@ public class AgregarPaciente extends JFrame {
 		
 		JLabel ingreseRut = new JLabel("Ingrese RUT del paciente:");
 		ingreseRut.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		ingreseRut.setBounds(282, 77, 166, 22);
+		ingreseRut.setBounds(282, 77, 170, 32);
 		contentPane.add(ingreseRut);
 		
 		JTextArea rutPaciente = new JTextArea();
-		rutPaciente.setBounds(282, 98, 166, 22);
+		rutPaciente.setBounds(282, 102, 166, 22);
 		contentPane.add(rutPaciente);
+		
+		JLabel ingreseEdad = new JLabel("Ingrese edad del paciente:");
+		ingreseEdad.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		ingreseEdad.setBounds(282, 134, 166, 32);
+		contentPane.add(ingreseEdad);
+		
+		JTextArea edadPaciente = new JTextArea();
+		edadPaciente.setBounds(282, 162, 166, 22);
+		contentPane.add(edadPaciente);
+		
+		JLabel ingreseGravedad = new JLabel("Ingrese gravedad del paciente:");
+		ingreseGravedad.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		ingreseGravedad.setBounds(282, 194, 204, 32);
+		contentPane.add(ingreseGravedad);
+		
+		JTextArea gravedadPaciente = new JTextArea();
+		gravedadPaciente.setBounds(282, 223, 166, 22);
+		contentPane.add(gravedadPaciente);
+		
+		JLabel ingresePatologia = new JLabel("Ingrese patología del paciente:");
+		ingresePatologia.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		ingresePatologia.setBounds(282, 258, 166, 32);
+		contentPane.add(ingresePatologia);
+		
+		JTextArea patologiaPaciente = new JTextArea();
+		patologiaPaciente.setBounds(282, 287, 166, 22);
+		contentPane.add(patologiaPaciente);
 	}
 }
