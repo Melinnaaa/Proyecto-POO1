@@ -4,6 +4,7 @@ import hospital.Seccion;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import pacientes.Paciente;
 import util.Lector;
 import vista.VistaEliminar;
 

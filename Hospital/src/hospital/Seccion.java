@@ -49,6 +49,30 @@ public class Seccion
 		// De no ser encontrado en ninguna pieza se muestra mensaje.
 		return false;
 	}
+        
+        // Recorre el arrayList de piezas y para encontrar al paciente a partir del rut
+	public Paciente seekPatient(String rut) throws IOException
+	{
+		Pieza tmpRoom;
+		Paciente patient;
+		// Se recorren las piezas
+		for (int i = 0 ; i < 10 ; i++)
+		{
+			// Se obtiene la pieza en la posición i-ésima.
+			tmpRoom = rooms.get(i);
+			
+			// Se asigna el paciente
+			patient = tmpRoom.search(rut);
+			
+			// Se busca el paciente en la pieza y si existe se termina el ciclo.
+			if (patient != null) 
+			{
+				return patient;
+			}		
+		}
+		// De no ser encontrado en ninguna pieza se muestra mensaje.
+		return null;
+	}
 		
 	// Sobrecarga
 	// Busca un paciente y lo edita.
