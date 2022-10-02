@@ -34,7 +34,8 @@ public class Principal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Principal() {
+	public Principal()
+	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 785, 512);
 		contentPane = new JPanel();
@@ -49,8 +50,10 @@ public class Principal extends JFrame {
 		contentPane.add(tituloBienvenida);
 		
 		JButton agregarPaciente = new JButton("Agregar Paciente");
-		agregarPaciente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent eventoIrAgregarPaciente) {
+		agregarPaciente.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent eventoIrAgregarPaciente) 
+			{
 				AgregarPaciente frame2 = new AgregarPaciente();
 				frame2.setVisible(true);
 				dispose();
