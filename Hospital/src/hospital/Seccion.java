@@ -50,7 +50,10 @@ public class Seccion
 		return false;
 	}
         
-        // Recorre el arrayList de piezas y para encontrar al paciente a partir del rut
+        /* Sobrecarga
+        *Recorre el arrayList de piezas y para encontrar al paciente a partir
+        * del rut y lo retorna si lo encuentra, utilizado para la interfaz.
+        */
 	public Paciente seekPatient(String rut) throws IOException
 	{
 		Pieza tmpRoom;
