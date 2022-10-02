@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import util.Lector;
 import vista.VistaAgregar;
+import vista.VistaBuscar;
 import vista.VistaEliminar;
 import vista.VistaMostrar;
 import vista.VistaMostrarPrincipal;
@@ -27,6 +28,12 @@ public class ControladorPrincipal
     public void mostrar() throws IOException
     {
         VistaMostrarPrincipal ventana = new VistaMostrarPrincipal();
+        ventana.setVisible(true);
+    }
+    
+    public void buscar() throws IOException
+    {
+        VistaBuscar ventana = new VistaBuscar();
         ventana.setVisible(true);
     }
     
