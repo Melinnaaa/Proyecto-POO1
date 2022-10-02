@@ -18,8 +18,10 @@ public class ControladorAgregar
         int gravedad = Integer.parseInt(ventana.getGravedad().getText());
         String patologia = ventana.getPatologia().getText();
         Seccion sec = new Seccion();
-        sec.addPatientRoom(room, name, rut, edad , gravedad, patologia);
-        sec.generateReport();
-        ventana.dispose();
+        if (sec.addPatientRoom(room, name, rut, edad , gravedad, patologia) == true)
+        {
+            sec.generateReport();
+            ventana.dispose();
+        }
     }
 }

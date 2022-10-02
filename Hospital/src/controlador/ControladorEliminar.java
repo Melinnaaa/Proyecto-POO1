@@ -13,9 +13,11 @@ public class ControladorEliminar
     public void eliminar(VistaEliminar ventana, String rut) throws IOException
     {
         Seccion sec = new Seccion();
-        sec.deletePatient(rut);
-        sec.exportPatients();
-        sec.generateReport();
-        ventana.dispose();
+        if (sec.deletePatient(rut) == true)
+        {
+            sec.exportPatients();
+            sec.generateReport();
+            ventana.dispose();
+        }
     }
 }

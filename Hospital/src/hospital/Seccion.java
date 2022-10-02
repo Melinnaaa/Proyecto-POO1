@@ -110,6 +110,28 @@ public class Seccion
 		}
 		return false;
 	}
+        
+        // Sobrecarga
+        // Busca el paciente lo guarda y retorna la pieza en donde estaba.
+        public Pieza seekPatient(String rut, Paciente tmpPatient) throws IOException
+	{
+		Pieza tmpRoom;
+		for (int i = 0; i < 10; i++)
+		{
+			// Se obtiene la pieza en la posición i-ésima.
+			tmpRoom = rooms.get(i);
+			
+			// Se asigna el paciente
+			tmpPatient = tmpRoom.search(rut);
+			
+			// Si el paciente se encontró.
+			if (tmpPatient != null)
+			{
+                            return tmpRoom;
+			}
+		}
+                return null;
+	}
 	
 	// Se buscan los pacientes de todas las piezas y se muestran
 	public void seekPatients(Impresora print) throws IOException
@@ -205,6 +227,10 @@ public class Seccion
 	public boolean addPatientRoom(int roomNumber, String name, int rut, int edad, int gravedad, String patologia) throws IOException
 	{	
 		Pieza tmpRoom;
+                if (roomNumber < 1 || roomNumber > 10)
+                {
+                    return false;
+                }
 		tmpRoom = rooms.get(roomNumber);
 		
 		// Se revisa que la pieza no este llena.
@@ -212,15 +238,20 @@ public class Seccion
 		{	
 			return false;
 		}
-                		// Se instancia un objeto paciente y se guardan los datos ingresados por el usuario.
+                // Se instancia un objeto paciente y se guardan los datos ingresados por el usuario.
 		Paciente patient = new Paciente(name, rut ,edad ,gravedad, patologia, roomNumber);
 
 		// Se revisa que el paciente no se encuentre en el hospital.
 		if (tmpRoom.search(patient.getRut()) == null)
 		{
-			tmpRoom.addPatient(patient, patient.getRut());
-                        exportPatients();
-			return true;
+                    // Se comprueba que se hayan ingresado datos
+                    if (name.equals("") == true || patologia.equals("") == true || gravedad == 0 || rut == 0)
+                    {
+                        return false;
+                    }
+                    tmpRoom.addPatient(patient, patient.getRut());
+                    exportPatients();
+                    return true;
 		}
 		return false;	
 	}
