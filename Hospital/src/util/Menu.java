@@ -2,6 +2,8 @@ package util;
 
 import java.io.IOException;
 
+import exceptions.AgeException;
+import exceptions.GravityException;
 import exceptions.RutException;
 import pacientes.Paciente;
 
@@ -46,7 +48,18 @@ public class Menu
 				}
 				catch (RutException e)
 				{
-					System.out.println("Error: " + e.getMessage());
+					System.out.println("Error: " + e.getMessage() + "\n");
+					l.setPatientData(tmp);
+				}
+				catch (AgeException e)
+				{
+					System.out.println("Error: " + e.getMessage() + "\n");
+					l.setPatientData(tmp);
+					
+				}
+				catch(GravityException e)
+				{
+					System.out.println("Error: " + e.getMessage() + "\n");
 					l.setPatientData(tmp);
 				}
 				tmp.setRut();
