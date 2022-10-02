@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import util.Lector;
 import vista.VistaAgregar;
 import vista.VistaBuscar;
+import vista.VistaEditar;
 import vista.VistaEliminar;
 import vista.VistaMostrar;
 import vista.VistaMostrarPrincipal;
@@ -34,6 +35,11 @@ public class ControladorPrincipal
     public void buscar() throws IOException
     {
         VistaBuscar ventana = new VistaBuscar();
+        ventana.setVisible(true);
+    }
+    public void editar () throws IOException
+    {
+        VistaEditar ventana = new VistaEditar();
         ventana.setVisible(true);
     }
     

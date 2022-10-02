@@ -15,6 +15,7 @@ public class ControladorEliminar
         Seccion sec = new Seccion();
         sec.deletePatient(rut);
         sec.exportPatients();
+        sec.generateReport();
         ventana.dispose();
     }
 }

@@ -9,7 +9,7 @@ import vista.VistaAgregar;
 
 public class ControladorAgregar 
 {
-    public static void agregar(VistaAgregar ventana) throws IOException
+    public void agregar(VistaAgregar ventana) throws IOException
     {
         int room = Integer.parseInt(ventana.getNumeroPieza().getText());
         String name = ventana.getNombre().getText();
@@ -19,6 +19,7 @@ public class ControladorAgregar
         String patologia = ventana.getPatologia().getText();
         Seccion sec = new Seccion();
         sec.addPatientRoom(room, name, rut, edad , gravedad, patologia);
+        sec.generateReport();
         ventana.dispose();
     }
 }
