@@ -1,7 +1,5 @@
 package hospital;
 import java.io.*;
-import java.util.*;
-
 import exceptions.RutException;
 import util.Impresora;
 import util.Lector;
@@ -16,6 +14,9 @@ public class Sistema
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Lector l = new Lector(reader);
         
+        // Se instancia un objeto impresora, utilizada para mostrar los datos de pacientes
+        Impresora print = new Impresora();
+        print.showOption();
         // Opción ingresada por el usuario
         int opcion = l.verifyNumber(1,2);
         // Si quiere usar interfaz gráfica.
@@ -33,9 +34,6 @@ public class Sistema
 
         // Se instancia un objeto sección 
         Seccion rooms = new Seccion();
-
-        // Se instancia un objeto impresora, utilizada para mostrar los datos de pacientes
-        Impresora print = new Impresora();
 
         // While que se termina con la opción 0.
         while (true)
