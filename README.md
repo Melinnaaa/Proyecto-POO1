@@ -1,3 +1,12 @@
-# Proyecto-POO1
+Proyecto Manejo Sistema de Salud
 
-D:
+Integrantes: Camila Diaz
+             Javier Marín
+             Arturo Reyes
+             
+El programa posee 2 modalidades de ejecución:
+  
+Al comenzar el prgrama aparecerá un mensaje por consola donde se le consultará si desea ejecutar el programa por ventana o seguir en la consola.
+ 
+
+
