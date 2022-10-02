@@ -14,7 +14,7 @@ public class Lector
 	// Se inicializa el reader utilizado en toda la clase.
 	public Lector (BufferedReader bf)
 	{
-		this.bf = bf;
+            this.bf = bf;
 	}
 	
 	// Se guardan los datos del paciente leidos por consola
@@ -54,31 +54,31 @@ public class Lector
 	    
 	    // Se lee la gravedad y se comprueba que sea numerica.
 	    System.out.println("Ingrese la gravedad del paciente:");
-        String gravityStr= bf.readLine();
-        isNumeric = gravityStr.chars().allMatch(Character::isDigit );
+            String gravityStr= bf.readLine();
+            isNumeric = gravityStr.chars().allMatch(Character::isDigit );
         
-        int gravedad; 
-        // Si la gravedad ingresada es numerica
-        if(isNumeric == true)
-        {
-        	gravedad = Integer.parseInt(gravityStr);
-        	// Si la gravedad supera el rango admitido.
-        	if (gravedad > 3 || gravedad < 0)
-        	{
-        		throw new GravityException();
-        	}
-        }
-        else
-        {
-        	throw new GravityException();
-        }
-        
-        System.out.println("Ingrese la patologia del paciente:");
-        String pathology = bf.readLine();
-        
-        // Se guardan los datos del ingresados instanciando un objeto paciente.
-        Paciente tmpPatient = new Paciente(name, rutNoDigit, age, gravedad, pathology, room);  
-        return tmpPatient;
+            int gravedad; 
+            // Si la gravedad ingresada es numerica
+            if(isNumeric == true)
+            {
+                gravedad = Integer.parseInt(gravityStr);
+                // Si la gravedad supera el rango admitido.
+                if (gravedad > 3 || gravedad < 0)
+                {
+                        throw new GravityException();
+                }
+            }
+            else
+            {
+                throw new GravityException();
+            }
+
+            System.out.println("Ingrese la patologia del paciente:");
+            String pathology = bf.readLine();
+
+            // Se guardan los datos del ingresados instanciando un objeto paciente.
+            Paciente tmpPatient = new Paciente(name, rutNoDigit, age, gravedad, pathology, room);  
+            return tmpPatient;
 	}
 	
 	// Sobrecarga
@@ -96,49 +96,48 @@ public class Lector
 	    tmp.setAge(readAge());
 	    
 	    // Se lee la gravedad
-        tmp.setGravedad(readGravity());
-        
-        // Se lee la patologia
-        System.out.println("Ingrese la patologia del paciente:");
-        tmp.setPathology(bf.readLine());
+            tmp.setGravedad(readGravity());
+
+            // Se lee la patologia
+            System.out.println("Ingrese la patologia del paciente:");
+            tmp.setPathology(bf.readLine());
 	}
 	
 	// Se lee el rut ingresado
 	public String readRut() throws IOException
 	{
-		System.out.println("Ingrese el rut del paciente:");
-		String rut = bf.readLine();
-		return rut;
+            System.out.println("Ingrese el rut del paciente:");
+            String rut = bf.readLine();
+            return rut;
 	}
 	
 	// Se lee la patologia ingresada
 	public String readPathology () throws IOException
 	{
-		System.out.println("Ingrese la patologia del paciente.");
-		String pathology = bf.readLine();
-		return pathology;
+            System.out.println("Ingrese la patologia del paciente.");
+            String pathology = bf.readLine();
+            return pathology;
 	}
 	
 	// Se lee el nombre ingresado
 	public String readName () throws IOException
 	{
-		System.out.println("Ingrese el nombre del paciente.");
-		String name = bf.readLine();
-		return name;
+            System.out.println("Ingrese el nombre del paciente.");
+            String name = bf.readLine();
+            return name;
 	}
 	
 	// Se lee la edad
 	public int readAge() throws IOException
 	{
-		int age;
-		do
-		{
-			System.out.println("Ingrese la edad del paciente.");
-			
-			age = Integer.parseInt(bf.readLine());
-		}while (age < 0);
-		
-		return age;
+            int age;
+            do
+            {
+                System.out.println("Ingrese la edad del paciente.");
+                age = Integer.parseInt(bf.readLine());
+            }while (age < 0);
+
+            return age;
 	}
 	
 	// Lee el rut sin digito
@@ -150,20 +149,20 @@ public class Lector
 	    do
 	    {
 	    	System.out.println("Ingrese el rut del paciente sin digito verificador y sin puntos.");
-			rut = bf.readLine();
-			
-			// Comprobamos que el rut no contenga caracteres.
-		    isNumeric = rut.chars().allMatch( Character::isDigit );
+                rut = bf.readLine();
+
+                // Comprobamos que el rut no contenga caracteres.
+                isNumeric = rut.chars().allMatch( Character::isDigit );
 	    }while(isNumeric == false);
 	    
 	    int rutNoDigit = Integer.parseInt(rut);
-		return rutNoDigit;
+            return rutNoDigit;
 	}
 	
 	// Se lee la gravedad ingresada
 	public int readGravity() throws IOException
 	{
-		String gravityStr;
+            String gravityStr;
 	    boolean isNumeric;
 	    
 	    //Se lee hasta que el rut no contenga caracteres.
@@ -172,46 +171,46 @@ public class Lector
 	    	System.out.println("Ingrese la gravedad del paciente (1-3)");
 	    	gravityStr = bf.readLine();
 	    	
-			// Comprobamos que el rut no contenga caracteres.
-		    isNumeric = gravityStr.chars().allMatch( Character::isDigit );
+                // Comprobamos que el rut no contenga caracteres.
+                isNumeric = gravityStr.chars().allMatch( Character::isDigit );
 	    }while(isNumeric == false);
 	    
-		//Se transforma a int
+            //Se transforma a int
 	    int gravity = Integer.parseInt(gravityStr);
 		
-		// Si la gravedad ingresada es menor a 0 se le asigna 1
-		if(gravity < 0)
-		{
-			gravity = 1;
-		}
-		// Si la gravedad ingresada es mayor a 3 se le asigna 3
-		else if (gravity > 3)
-		{
-			gravity = 3;
-		}
-		
-		return gravity;
+            // Si la gravedad ingresada es menor a 0 se le asigna 1
+            if(gravity < 0)
+            {
+                    gravity = 1;
+            }
+            // Si la gravedad ingresada es mayor a 3 se le asigna 3
+            else if (gravity > 3)
+            {
+                    gravity = 3;
+            }
+
+            return gravity;
 	}
 	
 	// Se lee el numero de la pieza
 	public int readRoomNumber() throws IOException
 	{
-		System.out.println("Ingrese la pieza en donde se quedará el paciente (1-10)");
-		int roomNumber = verifyNumber(1, 10) - 1;
-		return roomNumber;
+            System.out.println("Ingrese la pieza en donde se quedará el paciente (1-10)");
+            int roomNumber = verifyNumber(1, 10) - 1;
+            return roomNumber;
 	}
 	
 	// Verifica que el numero esté en el rango indicado
 	public int verifyNumber(int low, int high) throws IOException
 	{
-		int n;
-		
-		// Se verifica que se indique una pieza que exista.
-		do
-		{
-			n = Integer.parseInt(bf.readLine());
-		}while(n < low || n > high);
-		
-		return n;
+            int n;
+
+            // Se verifica que se indique una pieza que exista.
+            do
+            {
+                n = Integer.parseInt(bf.readLine());
+            }while(n < low || n > high);
+
+            return n;
 	}
 }
