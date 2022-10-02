@@ -2,6 +2,8 @@ package util;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import exceptions.AgeException;
+import exceptions.GravityException;
 import exceptions.RutException;
 import pacientes.Paciente;
 
@@ -16,7 +18,7 @@ public class Lector
 	}
 	
 	// Se guardan los datos del paciente leidos por consola
-	public Paciente setPatientData(int room) throws IOException, RutException
+	public Paciente setPatientData(int room) throws IOException, RutException, AgeException, GravityException
 	{
 	    // Se obtienen los datos del paciente
 	    System.out.println("Ingrese el nombre del paciente:");
@@ -44,9 +46,32 @@ public class Lector
 	    
 	    System.out.println("Ingrese la edad del paciente:");
 	    int age = Integer.parseInt(bf.readLine());
+	    // Si la edad es negativa
+	    if (age < 0)
+	    {
+	    	throw new AgeException();
+	    }
 	    
+	    // Se lee la gravedad y se comprueba que sea numerica.
 	    System.out.println("Ingrese la gravedad del paciente:");
-        int gravedad = Integer.parseInt(bf.readLine());
+        String gravityStr= bf.readLine();
+        isNumeric = gravityStr.chars().allMatch(Character::isDigit );
+        
+        int gravedad; 
+        // Si la gravedad ingresada es numerica
+        if(isNumeric == true)
+        {
+        	gravedad = Integer.parseInt(gravityStr);
+        	// Si la gravedad supera el rango admitido.
+        	if (gravedad > 3 || gravedad < 0)
+        	{
+        		throw new GravityException();
+        	}
+        }
+        else
+        {
+        	throw new GravityException();
+        }
         
         System.out.println("Ingrese la patologia del paciente:");
         String pathology = bf.readLine();
@@ -57,7 +82,7 @@ public class Lector
 	}
 	
 	// Sobrecarga
-	// Se guardan los datos del paciente leidos por consola
+	// Se guardan los datos del paciente leidos por consola evitando potenciales errores
 	public void setPatientData(Paciente tmp) throws IOException
 	{
 	    // Se obtienen los datos del paciente
@@ -68,12 +93,10 @@ public class Lector
 	    tmp.setRut(readRutNoDigit());
 	    
 	    // Se lee la edad
-	    System.out.println("Ingrese la edad del paciente:");
-	    tmp.setAge(Integer.parseInt(bf.readLine()));
+	    tmp.setAge(readAge());
 	    
 	    // Se lee la gravedad
-	    System.out.println("Ingrese la gravedad del paciente:");
-        tmp.setGravedad(Integer.parseInt(bf.readLine()));
+        tmp.setGravedad(readGravity());
         
         // Se lee la patologia
         System.out.println("Ingrese la patologia del paciente:");
@@ -107,8 +130,14 @@ public class Lector
 	// Se lee la edad
 	public int readAge() throws IOException
 	{
-		System.out.println("Ingrese la edad del paciente.");
-		int age = Integer.parseInt(bf.readLine());
+		int age;
+		do
+		{
+			System.out.println("Ingrese la edad del paciente.");
+			
+			age = Integer.parseInt(bf.readLine());
+		}while (age < 0);
+		
 		return age;
 	}
 	
@@ -134,12 +163,37 @@ public class Lector
 	// Se lee la gravedad ingresada
 	public int readGravity() throws IOException
 	{
-		System.out.println("Ingrese la gravedad del paciente (1-3)");
-		int gravity = verifyNumber(1,3);
+		String gravityStr;
+	    boolean isNumeric;
+	    
+	    //Se lee hasta que el rut no contenga caracteres.
+	    do
+	    {
+	    	System.out.println("Ingrese la gravedad del paciente (1-3)");
+	    	gravityStr = bf.readLine();
+	    	
+			// Comprobamos que el rut no contenga caracteres.
+		    isNumeric = gravityStr.chars().allMatch( Character::isDigit );
+	    }while(isNumeric == false);
+	    
+		//Se transforma a int
+	    int gravity = Integer.parseInt(gravityStr);
+		
+		// Si la gravedad ingresada es menor a 0 se le asigna 1
+		if(gravity < 0)
+		{
+			gravity = 1;
+		}
+		// Si la gravedad ingresada es mayor a 3 se le asigna 3
+		else if (gravity > 3)
+		{
+			gravity = 3;
+		}
+		
 		return gravity;
 	}
 	
-	// Se lee
+	// Se lee el numero de la pieza
 	public int readRoomNumber() throws IOException
 	{
 		System.out.println("Ingrese la pieza en donde se quedará el paciente (1-10)");
