@@ -27,8 +27,6 @@ public class Sistema
             return;
         }
             
-        
-
         // Se instancia un objeto menu para utilizar sus metodos.
         Menu menu = new Menu();
 

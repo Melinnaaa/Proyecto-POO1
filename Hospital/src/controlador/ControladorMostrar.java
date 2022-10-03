@@ -18,6 +18,7 @@ public class ControladorMostrar
     {
         CSV file = new CSV("patients");
 	String line = file.firstLine();
+        Paciente tmp = new Paciente();
         DefaultTableModel model = (DefaultTableModel) ventana.getPacientes().getModel();
         model.setNumRows(0);
         while (file.get_csvField(0,line) != null)
@@ -25,6 +26,9 @@ public class ControladorMostrar
             String [] row = new String[6];
             row[0] = file.get_csvField(0,line);
             row[1] = file.get_csvField(1, line);
+            tmp.setRut(Integer.parseInt(row[1]));
+            tmp.setRut();
+            row[1] = tmp.getRut();
             row[2] = file.get_csvField(2, line);
             row[3] = file.get_csvField(3, line);
             row[4] = file.get_csvField(4, line);
@@ -39,6 +43,7 @@ public class ControladorMostrar
     {
         CSV file = new CSV("patients");
 	String line = file.firstLine();
+        Paciente tmp = new Paciente();
         DefaultTableModel model = (DefaultTableModel) ventana.getPacientes().getModel();
         model.setNumRows(0);
         while (file.get_csvField(0,line) != null)
@@ -46,6 +51,9 @@ public class ControladorMostrar
             String [] row = new String[6];
             row[0] = file.get_csvField(0,line);
             row[1] = file.get_csvField(1, line);
+            tmp.setRut(Integer.parseInt(row[1]));
+            tmp.setRut();
+            row[1] = tmp.getRut();
             row[2] = file.get_csvField(2, line);
             row[3] = file.get_csvField(3, line);
             row[4] = file.get_csvField(4, line);
@@ -63,6 +71,7 @@ public class ControladorMostrar
     {
         CSV file = new CSV("patients");
 	String line = file.firstLine();
+        Paciente tmp = new Paciente();
         DefaultTableModel model = (DefaultTableModel) ventana.getPacientes().getModel();
         model.setNumRows(0);
         while (file.get_csvField(0,line) != null)
@@ -70,6 +79,9 @@ public class ControladorMostrar
             String [] row = new String[6];
             row[0] = file.get_csvField(0,line);
             row[1] = file.get_csvField(1, line);
+            tmp.setRut(Integer.parseInt(row[1]));
+            tmp.setRut();
+            row[1] = tmp.getRut();
             row[2] = file.get_csvField(2, line);
             row[3] = file.get_csvField(3, line);
             row[4] = file.get_csvField(4, line);

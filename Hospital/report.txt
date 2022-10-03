@@ -12,6 +12,11 @@ Pacientes en la pieza 2:
 
 Doctor a cargo de la pieza: Maria Pilar
 
+Nombre: Juan Martin Lucexo
+Rut: 16843542
+Edad: 30
+Gravedad: 1
+Patologia: Esguince en los cocos
 Nombre: Camila Diaz
 Rut: 21071085
 Edad: 20
